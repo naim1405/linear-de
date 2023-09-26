@@ -3,7 +3,7 @@ from sympy import *
 import matplotlib.pyplot as plt
 import io
 
-# Saving the equation ans solve in png file
+# Saving the equation solve in png file
 
 eqn_path = './equation.png'
 solve_path = './solve.png'
@@ -24,8 +24,11 @@ def latex_to_png(latex_str, file_path):
 x, y, c = smp.symbols('x y c')
 
 def solve(ddx, c_y, const):
+    # coefficient of d/dx
     ddx = ddx.replace('^', "**")
+    # coefficient of y
     c_y = c_y.replace('^', "**")
+    # constant
     const = const.replace('^', "**")
     ddx = parse_expr(ddx)
     c_y = parse_expr(c_y)
@@ -37,6 +40,7 @@ def solve(ddx, c_y, const):
     c_y = c_y / ddx
     const = const / ddx
     ddx = 1
+    # integrating factor
     i_f = integrate(c_y, x)
     i_f = smp.exp(i_f)
 
@@ -45,7 +49,6 @@ def solve(ddx, c_y, const):
     solve = solve + c
     solve = solve / i_f
     solve = Eq(y, solve)
-
     ans = latex(solve)
     latex_to_png(ans, solve_path)
 
