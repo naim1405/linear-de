@@ -5,8 +5,8 @@ import io
 
 # Saving the equation solve in png file
 
-eqn_path = './equation.png'
-solve_path = './solve.png'
+eqn_path = './static/equation.png'
+solve_path = './static/solve.png'
 
 def latex_to_png(latex_str, file_path):
     fig = plt.figure()
@@ -19,11 +19,10 @@ def latex_to_png(latex_str, file_path):
     with open(file_path, 'wb') as f:
         f.write(buffer.getvalue())
     
+
 # Function to solve the linear differential equation
-
-x, y, c = smp.symbols('x y c')
-
 def solve(ddx, c_y, const):
+    x, y, c = smp.symbols('x y c')
     # coefficient of d/dx
     ddx = ddx.replace('^', "**")
     # coefficient of y
@@ -58,4 +57,4 @@ def solve(ddx, c_y, const):
 # solve("1 + smp.sin(x)**2", "smp.sin(2*x)", "smp.cos(x)")
 # solve("1 + sin(x)**2", "sin(2*x)", "cos(x)")
 
-solve("1 + sin(x)^2", "sin(2*x)", "cos(x)")
+# solve("1 + sin(x)^2", "sin(2*x)", "cos(x)")
