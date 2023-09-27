@@ -1,7 +1,6 @@
 import sympy as smp
 from sympy import *
-import matplotlib.pyplot as plt
-import io
+import latex2mathml.converter
 
 # Saving the equation solve in png file
 
@@ -18,38 +17,42 @@ def latex_to_png(latex_str, file_path):
     plt.close(fig)
     with open(file_path, 'wb') as f:
         f.write(buffer.getvalue())
+    return
     
+
+def get_eqn(ddx, c_y, const):
+    x, y, c = smp.symbols('x y c')
+    euler_dict = {'e': E}
+    ddx = sympify(ddx,locals=euler_dict)
+    c_y = sympify(c_y,locals=euler_dict)
+    const = sympify(const,locals=euler_dict)
+    eq = Eq(Derivative(y,x) * ddx + c_y * y, const)
+    eq = latex(eq)
+    return latex2mathml.converter.convert(eq)
+
 
 # Function to solve the linear differential equation
 def solve(ddx, c_y, const):
     x, y, c = smp.symbols('x y c')
-    # coefficient of d/dx
-    ddx = ddx.replace('^', "**")
-    # coefficient of y
-    c_y = c_y.replace('^', "**")
-    # constant
-    const = const.replace('^', "**")
-    ddx = parse_expr(ddx)
-    c_y = parse_expr(c_y)
-    const = parse_expr(const)
-
-    eq = Eq(Derivative(y,x) * ddx + c_y * y, const)
-    latex_to_png(latex(eq), eqn_path)
+    euler_dict = {'e': E}
+    ddx = sympify(ddx,locals=euler_dict)
+    c_y = sympify(c_y,locals=euler_dict)
+    const = sympify(const,locals=euler_dict)
 
     c_y = c_y / ddx
     const = const / ddx
     ddx = 1
-    # integrating factor
+    # # integrating factor
     i_f = integrate(c_y, x)
     i_f = smp.exp(i_f)
 
-    # Prints the solved equation
+    # # Prints the solved equation
     solve = (integrate(i_f * const))
     solve = solve + c
     solve = solve / i_f
     solve = Eq(y, solve)
     ans = latex(solve)
-    latex_to_png(ans, solve_path)
+    return latex2mathml.converter.convert(ans)
 
 
 

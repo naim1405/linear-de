@@ -15,15 +15,19 @@ def home():
         ddx = request.form['ddx']
         c_y = request.form['c_y']
         const = request.form['const']
-        solve(ddx, c_y, const)
-        return redirect('/soln')
+        # print(const)
+        eqn = get_eqn(ddx, c_y, const)
+
+        solv = solve(ddx, c_y, const)
+        # return redirect(url_for('soln',eqn = eqn, soln = solv))
+        return render_template("soln.html", eqn = eqn, soln = solv)
     
     return render_template("form.html")
     
 @app.route("/soln")
-def soln():
-    return render_template("soln.html")
+def soln(eqn, soln):
+    return render_template("soln.html", eqn = eqn, soln = soln)
 
 if __name__ == "__main__":
-    # app.run(debug=True)
-    app.run()
+    app.run(debug=True)
+    # app.run()
