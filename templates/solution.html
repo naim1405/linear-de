@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solution - Linear Differential Equation Solver</title>
+    <style>
+        body {
+    font-family: "Roboto", Arial, sans-serif;
+    background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+}
+
+.header {
+    text-align: center;
+    padding: 50px 0;
+    background-color: #0078d4;
+    color: white;
+    width: 100%;
+}
+
+.header h1 {
+    font-size: 36px;
+}
+
+.solution-container {
+    text-align: center;
+    padding: 20px;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.boxed-content {
+    max-width: 600px;
+    width: 100%; /* Make sure the content takes the full width within the container */
+    vertical-align: top;
+}
+
+.boxed-content h3 {
+    font-size: 24px;
+    margin: 10px 0;
+}
+
+.boxed-content p {
+    font-size: 18px;
+    margin: 10px 0;
+    border: 2px solid #0078d4;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: white;
+}
+
+.return-link {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.return-link h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.return-link a {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 20px;
+    background-color: #0078d4;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.return-link a:hover {
+    background-color: #005ea2;
+}
+
+.back-button {
+            position: absolute;
+            top: 70px;
+	    left: 30px;
+        }
+    </style>
+</head>
+<body> 
+    <a href="{{url_for('home')}}" class="back-button">
+
+        <img src="../static/back-arrow.png" alt="Back to Homepage" width="50" height="50">
+    </a>
+
+    <div class="header">
+        <h1>Linear Differential Equation Solver</h1>
+    </div>
+    <div class="solution-container">
+        <div class="boxed-content">
+            <h3>Entered Equation:</h3>
+            <p>{{eqn | safe}}</p>
+        </div>
+        <div class="boxed-content">
+            <h3>Solution:</h3>
+            <p>{{soln | safe}}</p>
+        </div>
+    </div>
+    <div class="return-link">
+        <h2><a href="{{url_for('solver')}}">Solve another</a></h2>
+    </div>
+</body>
+</html>

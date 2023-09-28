@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linear Differential Equation Solver</title>
+    <link rel="icon" type="image/x-icon" href="../static/icon.png">
+    <style>
+        body {
+           font-family: "Roboto", Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            text-align: center;
+            padding: 50px 0;
+            background-color: #0078d4;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 36px;
+        }
+
+        .form-container {
+            text-align: center;
+            padding: 20px;
+            margin: 20px;
+            max-width: 400px; 
+            margin: 0 auto;
+        }
+
+        .form-container p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .form-container input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        .form-container input[type="submit"] {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #0078d4;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-container input[type="submit"]:hover {
+            background-color: #005ea2;
+        }
+        .back-button {
+            position: absolute;
+            top: 70px;
+	    left: 30px;
+        }
+    </style>
+</head>
+<body>
+    <a href="{{url_for('home')}}" class="back-button">
+        <img src="../static/back-arrow.png" alt="Back to Homepage" width="50" height="50">
+    </a>
+
+    <div class="header">
+        <h1>Linear Differential Equation Solver</h1>
+    </div>
+    <div class="form-container">
+        <form action="" method="post">
+            <p>Enter the coefficient of d/dx:</p>
+            <input type="text" name="ddx" id="">
+            <p>Enter the coefficient of y:</p>
+            <input type="text" name="c_y" id="">
+            <p>Enter the constant:</p>
+            <input type="text" name="const" id="">
+            <p></p>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Our Team</title>
+    <link rel="icon" type="image/x-icon" href="icon.png">
+    <style>
+        body {
+            font-family: "Roboto", Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            text-align: center;
+            padding: 50px 0;
+            background-color: #0078d4;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 36px;
+        }
+
+        .team-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            padding: 20px;
+            justify-content: center;
+            align-items: center;
+            margin: 20px;
+        }
+
+        .team-member {
+            text-align: center;
+            background-color: #0078d4;
+            color: white;
+            padding: 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .team-member:hover {
+            background-color: #005ea2;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 70px;
+	    left: 30px;
+        }
+
+    </style>
+</head>
+<body>
+    <a href="{{url_for('home')}}" class="back-button">
+        <img src="../static/back-arrow.png" alt="Back to Homepage" width="50" height="50">
+    </a>
+    <div class="header">
+        <h1>About Our Team</h1>
+    </div>
+    <div class="team-container">
+        <div class="team-member">MAHFUZ SAIM<br>Developer</div>
+        <div class="team-member">MD. OLY HOSSEN<br>Co-ordinator</div>
+        <div class="team-member">MD. NAIMUZZAMAN<br>Programmer</div>
+        <div class="team-member">SHOAIB BIN RASHID<br>Programmer</div>
+        <div class="team-member">MST. MIM AFSANA MIM<br>Programmer</div>
+        <div class="team-member">HISHAM IBN MAHBUB<br>Programmer</div>
+        <div class="team-member">HABIBUNNOBI MARUF<br>Math Solver</div>
+        <div class="team-member">MAYESHA MALIHA<br>Math Solver</div>
+        <div class="team-member">MD. MAHMUDUL HASAN<br>Math Solver</div>
+        <div class="team-member">TASNIM TABASSUM JINIA<br>Presenter</div>
+    </div>
+</body>
+</html>

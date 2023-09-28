@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linear Differential Equation Solver</title>
+    <link rel="icon" type="image/x-icon" href="../static/icon.png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            text-align: center;
+            padding: 50px 0;
+            background-color: #0078d4;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 36px;
+        }
+
+        .buttons {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .button {
+            display: inline-block;
+            margin: 10px;
+            padding: 15px 30px;
+            font-size: 18px;
+            text-decoration: none;
+            color: white;
+            background-color: #0078d4;
+            border: none;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #005ea2;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Linear Differential Equation Solver</h1>
+    </div>
+    <div class="buttons">
+        <!-- <a href="http://localhost:5000/" class="button">Equation Solver</a> -->
+        <a href="{{url_for('solver')}}" class="button">Equation Solver</a>
+        <!-- <a href="user-manual.html" class="button">User Manual</a> -->
+        <a href="{{url_for('manual')}}" class="button">User Manual</a>
+        <a href="{{url_for('about')}}" class="button">About Our Team</a>
+    </div>
+</body>
+</html>
