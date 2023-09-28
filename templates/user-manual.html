@@ -1,2 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Manual</title>
+    <link rel="icon" type="image/x-icon" href="../static/icon.png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
 
-<h1> user manual </h1>
+        .header {
+            text-align: center;
+            padding: 50px 0;
+            background-color: #0078d4;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 36px;
+        }
+
+        .manual-table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        .manual-table th,
+        .manual-table td {
+            border: 1px solid #ccc;
+            padding: 0;
+            text-align: center;
+            background-color: white; /* Set the background color to white */
+        }
+
+        /* Increase font size for table header cells */
+        .manual-table th {
+            background-color: #0078d4;
+            color: white;
+            font-weight: bold;
+            font-size: 30px; /* Adjust the font size as needed */
+        }
+
+        /* Set a fixed height for table rows */
+        .manual-table td {
+            height: 45px; /* Fixed height for all rows */
+            vertical-align: middle; /* Center content vertically */
+        }
+
+        .manual-table img {
+            max-width: 100%;
+            height: 100%; /* Set the height of images to fill the cell */
+            display: block;
+            margin: 0 auto; /* Center the image horizontally */
+        }
+	.back-button {
+            position: absolute;
+            top: 70px;
+	    left: 30px;
+        }
+    </style>
+</head>
+<body>
+    <a href="{{url_for('home')}}" class="back-button">
+        <img src="../static/back-arrow.png" alt="Back to Homepage" width="50" height="50">
+    </a>
+    <div class="header">
+        <h1>User Manual</h1>
+    </div>
+    <table class="manual-table">
+        <thead>
+            <tr>
+                <th>Desired Equation</th>
+                <th>Input Command</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><img src="../static/1.png" alt="1.png"></td>
+                <td><img src="../static/2.png" alt="2.png"></td>
+            </tr>
+            <tr>
+                <td><img src="../static/3.png" alt="3.png"></td>
+                <td><img src="../static/4.png" alt="4.png"></td>
+            </tr>
+            <tr>
+                <td><img src="../static/5.png" alt="5.png"></td>
+                <td><img src="../static/6.png" alt="6.png"></td>
+            </tr>
+            <tr>
+                <td><img src="../static/7.png" alt="7.png"></td>
+                <td><img src="../static/8.png" alt="8.png"></td>
+            </tr>
+            <tr>
+                <td><img src="../static/9.png" alt="9.png"></td>
+                <td><img src="../static/10.png" alt="10.png"></td>
+            </tr>
+            <tr>
+                <td><img src="../static/11.png" alt="11.png"></td>
+                <td><img src="../static/12.png" alt="12.png"></td>
+            </tr>
+            <tr>
+                <td><img src="../static/13.png" alt="13.png"></td>
+                <td><img src="../static/14.png" alt="14.png"></td>
+            </tr>
+            <tr>
+                <td><img src="../static/15.png" alt="15.png"></td>
+                <td><img src="../static/16.png" alt="16.png"></td>
+            </tr>
+	    <tr>
+                <td><img src="../static/17.png" alt="17.png"></td>
+                <td><img src="../static/18.png" alt="18.png"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
