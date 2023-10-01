@@ -43,7 +43,7 @@ def solver_func(eqn_str):
         i_f = smp.exp(i_f)
 
         # Returns the solved equation
-        soln = (integrate(i_f * const))
+        soln = (integrate(i_f * const, x))
         soln = soln + c
         soln = soln / i_f
         soln = Eq(y, soln)
@@ -51,10 +51,10 @@ def solver_func(eqn_str):
         return latex2mathml.converter.convert(ans)
         return soln
     except ValueError:
-        str = "Incorrect equation"
+        str = "Incorrect equation Value error"
         return str
     except IndexError:
-        str = "Incorrect equation"
+        str = "Incorrect equation index error"
         return str
 
 # Function to solve the linear differential equation with initial value
@@ -83,7 +83,7 @@ def initial_val_solver_func(eqn_str, x_val, y_val):
         i_f = smp.exp(i_f)
 
         # Returns the solved equation
-        soln = (integrate(i_f * const))
+        soln = (integrate(i_f * const, x))
         soln = soln + c
         soln = soln / i_f
         soln = Eq(y, soln)
