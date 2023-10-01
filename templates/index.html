@@ -38,12 +38,36 @@
             color: white;
             background-color: #0078d4;
             border: none;
+	    width: 200px;
             cursor: pointer;
         }
 
         .button:hover {
             background-color: #005ea2;
         }
+	/* CSS to animate button from left to right */
+	.button-left-to-right {
+            transform: translateX(-100%);
+            animation: slideFromLeft 0.75s ease-in-out forwards;
+        }
+	
+	/* CSS to animate button from right to left */
+	.button-right-to-left {
+        transform: translateX(100%);
+        animation: slideFromRight 0.75s ease-in-out forwards;
+	}
+
+	@keyframes slideFromLeft {
+    	to {
+        transform: translateX(0);
+    	}
+	}
+	@keyframes slideFromRight {
+    	to {
+        transform: translateX(0);
+    	}
+	}
+
     </style>
 </head>
 <body>
@@ -51,12 +75,10 @@
         <h1>Linear Differential Equation Solver</h1>
     </div>
     <div class="buttons">
-        <!-- <a href="http://localhost:5000/" class="button">Equation Solver</a> -->
-        <a href="{{url_for('solver', initial_value = 'False')}}" class="button">Equation Solver</a>
-        <a href="{{url_for('solver', initial_value = 'True')}}" class="button">Equation Solver with initial value</a>
-        <!-- <a href="user-manual.html" class="button">User Manual</a> -->
-        <a href="{{url_for('manual')}}" class="button">User Manual</a>
-        <a href="{{url_for('about')}}" class="button">About Our Team</a>
+        <a href="{{url_for('solver', initial_value = 'False')}}" class="button button-left-to-right">Equation Solver</a> <br>
+<a href="{{url_for('solver', initial_value = 'True')}}" class="button button-right-to-left">Equation Solver With Initial Value</a> <br>
+<a href="{{url_for('manual')}}" class="button button-left-to-right">User Manual</a> <br>
+<a href="{{url_for('about')}}" class="button button-right-to-left">About Our Team</a> <br>
     </div>
 </body>
 </html>

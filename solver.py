@@ -3,14 +3,14 @@ from sympy import *
 import latex2mathml.converter
 
 # generates the equation from coefficient and returns in mathML format
-def get_eqn(ddx, c_y, const):
+def get_eqn(eqn_str):
     x, y, c = smp.symbols('x y c')
     euler_dict = {'e': E}
+    eq_lhs_str, eq_rhs_str = eqn_str.split('=')
     try:
-        ddx = sympify(ddx,locals=euler_dict)
-        c_y = sympify(c_y,locals=euler_dict)
-        const = sympify(const,locals=euler_dict)
-        eq = Eq(Derivative(y,x) * ddx + c_y * y, const)
+        eqn_lhs = sympify(eq_lhs_str, locals=euler_dict)
+        eqn_rhs = sympify(eq_rhs_str, locals=euler_dict)
+        eq = Eq(eqn_lhs, eqn_rhs)
         eq = latex(eq)
         return latex2mathml.converter.convert(eq)
     except SympifyError:
@@ -18,14 +18,23 @@ def get_eqn(ddx, c_y, const):
 
 
 # Function to solve the linear differential equation with no initial value
-def solver_func(ddx, c_y, const):
+def solver_func(eqn_str):
     x, y, c = smp.symbols('x y c')
     euler_dict = {'e': E}
+    eqn_str = eqn_str.replace("dy/dx", "Derivative(y, x)")
+    eq_lhs_str, eq_rhs_str = eqn_str.split('=')
+    
     try:
-        ddx = sympify(ddx,locals=euler_dict)
-        c_y = sympify(c_y,locals=euler_dict)
-        const = sympify(const,locals=euler_dict)
-
+        eqn_lhs = sympify(eq_lhs_str, locals=euler_dict)
+        eqn_rhs = sympify(eq_rhs_str, locals=euler_dict)
+        eq = Eq(eqn_lhs, eqn_rhs)
+        poly_eqn = smp.Poly(eq, [smp.Derivative(y, x), y])
+        # Extract the coefficients
+        coeffs = poly_eqn.coeffs()
+        ddx = coeffs[0]
+        c_y = coeffs[1]
+        const = coeffs[2] * -1
+ 
         c_y = c_y / ddx
         const = const / ddx
         ddx = 1
@@ -40,27 +49,40 @@ def solver_func(ddx, c_y, const):
         soln = Eq(y, soln)
         ans = latex(soln)
         return latex2mathml.converter.convert(ans)
+        return soln
     except ValueError:
+        str = "Incorrect equation"
+        return str
+    except IndexError:
         str = "Incorrect equation"
         return str
 
 # Function to solve the linear differential equation with initial value
-def initial_val_solver_func(ddx, c_y, const, x_val, y_val):
+def initial_val_solver_func(eqn_str, x_val, y_val):
     x, y, c = smp.symbols('x y c')
     euler_dict = {'e': E}
+    eqn_str = eqn_str.replace("dy/dx", "Derivative(y, x)")
+    eq_lhs_str, eq_rhs_str = eqn_str.split('=')
+    
     try:
-        ddx = sympify(ddx,locals=euler_dict)
-        c_y = sympify(c_y,locals=euler_dict)
-        const = sympify(const,locals=euler_dict)
-
+        eqn_lhs = sympify(eq_lhs_str, locals=euler_dict)
+        eqn_rhs = sympify(eq_rhs_str, locals=euler_dict)
+        eq = Eq(eqn_lhs, eqn_rhs)
+        poly_eqn = smp.Poly(eq, [smp.Derivative(y, x), y])
+        # Extract the coefficients
+        coeffs = poly_eqn.coeffs()
+        ddx = coeffs[0]
+        c_y = coeffs[1]
+        const = coeffs[2] * -1
+ 
         c_y = c_y / ddx
         const = const / ddx
         ddx = 1
-        # # integrating factor
+        # integrating factor
         i_f = integrate(c_y, x)
         i_f = smp.exp(i_f)
 
-        # # Returns the solved equation
+        # Returns the solved equation
         soln = (integrate(i_f * const))
         soln = soln + c
         soln = soln / i_f
@@ -72,5 +94,8 @@ def initial_val_solver_func(ddx, c_y, const, x_val, y_val):
         ans = latex(soln)
         return latex2mathml.converter.convert(ans)
     except ValueError:
+        str = "Incorrect equation"
+        return str
+    except IndexError:
         str = "Incorrect equation"
         return str

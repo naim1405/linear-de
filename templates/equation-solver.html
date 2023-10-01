@@ -61,14 +61,23 @@
         }
         .back-button {
             position: absolute;
-            top: 70px;
-	    left: 30px;
+            top: 25px;
+	    left: 25px;
+        }
+
+	math {
+            display: inline-block;
+            font-size: 20px; /* Adjust the font size as needed */
+        }
+
+        mi {
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
     <a href="{{url_for('home')}}" class="back-button">
-        <img src="../static/back-arrow.png" alt="Back to Homepage" width="50" height="50">
+        <img src="../static/back-arrow.png" alt="Back to Homepage" width="40" height="40">
     </a>
 
     <div class="header">
@@ -76,12 +85,8 @@
     </div>
     <div class="form-container">
         <form action="" method="post">
-            <p>Enter the coefficient of d/dx</p>
-            <input type="text" name="ddx" id="">
-            <p>Enter the coefficient of y</p>
-            <input type="text" name="c_y" id="">
-            <p>Enter the constant</p>
-            <input type="text" name="const" id="">
+            <p>Enter the Equation</p>
+            <input type="text" name="eqn" id="">
             <p></p>
             <input type="submit" value="Submit">
         </form>
