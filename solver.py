@@ -2,6 +2,9 @@ import sympy as smp
 from sympy import *
 import latex2mathml.converter
 
+
+error_str = "Incorrect Equataion or Non-Linear Equation"
+
 # generates the equation from coefficient and returns in mathML format
 def get_eqn(eqn_str):
     var_x = ""
@@ -21,25 +24,40 @@ def get_eqn(eqn_str):
         eq = latex(eq)
         return latex2mathml.converter.convert(eq)
     except SympifyError:
-        return "Incorrect quation format"
+        return error_str
 
 
 # Function to solve the linear differential equation with no initial value
 def solver_func(eqn_str):
     var_x = ""
     var_y = ""
+
     for i in range(len(eqn_str)):
         if(eqn_str[i] == 'd' and eqn_str[i+2] == '/' and eqn_str[i+3] == 'd'):
             var_x = eqn_str[i+4]
             var_y = eqn_str[i+1]
             break
-
+        
+    
     x, y, c = smp.symbols(f'{var_x} {var_y} c')
     euler_dict = {'e': E}
     eqn_str = eqn_str.replace(f"d{var_y}/d{var_x}", f"Derivative({var_y}, {var_x})")
     eq_lhs_str, eq_rhs_str = eqn_str.split('=')
     
+    
+    
     try:
+        y_pow = 1
+        y_count = 0;
+        for i in range(len(eqn_str)):
+            if( eqn_str[i] == var_y):
+                y_count += 1
+            if( eqn_str[i] == var_y and  eqn_str[i+1] == '^' ):
+                y_pow = int(eqn_str[i+2])
+        if(y_pow != 1 or y_count != 2):
+            # return "Non Linear Eqn"
+            return error_str
+
         eqn_lhs = sympify(eq_lhs_str, locals=euler_dict)
         eqn_rhs = sympify(eq_rhs_str, locals=euler_dict)
         eq = Eq(eqn_lhs, eqn_rhs)
@@ -67,11 +85,15 @@ def solver_func(eqn_str):
         return latex2mathml.converter.convert(ans)
         
     except ValueError:
-        str = "Incorrect equation"
-        return str
+        return error_str
     except IndexError:
-        str = "Incorrect equation"
-        return str
+        return error_str
+    except PolynomialError:
+        return error_str
+    except IndexError:
+        return error_str
+
+        
 
 # Function to solve the linear differential equation with initial value
 def initial_val_solver_func(eqn_str, x_val, y_val):
@@ -82,6 +104,8 @@ def initial_val_solver_func(eqn_str, x_val, y_val):
             var_x = eqn_str[i+4]
             var_y = eqn_str[i+1]
             break
+    
+
 
     x, y, c = smp.symbols(f'{var_x} {var_y} c')
     euler_dict = {'e': E}
@@ -89,6 +113,17 @@ def initial_val_solver_func(eqn_str, x_val, y_val):
     eq_lhs_str, eq_rhs_str = eqn_str.split('=')
     
     try:
+        y_pow = 1
+        y_count = 0;
+        for i in range(len(eqn_str)):
+            if( eqn_str[i] == var_y):
+                y_count += 1
+            if( eqn_str[i] == var_y and  eqn_str[i+1] == '^' ):
+                y_pow = int(eqn_str[i+2])
+        if(y_pow != 1 or y_count != 2):
+            # return "Non Linear Eqn"
+            return error_str
+
         eqn_lhs = sympify(eq_lhs_str, locals=euler_dict)
         eqn_rhs = sympify(eq_rhs_str, locals=euler_dict)
         eq = Eq(eqn_lhs, eqn_rhs)
@@ -118,8 +153,10 @@ def initial_val_solver_func(eqn_str, x_val, y_val):
         ans = latex(soln)
         return latex2mathml.converter.convert(ans)
     except ValueError:
-        str = "Incorrect equation"
-        return str
+        return error_str
     except IndexError:
-        str = "Incorrect equation"
-        return str
+        return error_str
+    except PolynomialError:
+        return error_str
+    except IndexError:
+        return error_str
